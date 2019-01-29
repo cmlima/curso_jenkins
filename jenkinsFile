@@ -1,0 +1,41 @@
+// Powered by Infostretch 
+
+timestamps {
+
+node ('devops') { 
+
+	stage ('build_bluegreen - Build') {
+ 			// Shell build step
+sh """ 
+echo build 
+ """		// Ansible playbook 
+	}
+	stage ('container_bluegreen - Build') {
+ 			// Shell build step
+sh """ 
+echo container 
+ """		// Ansible playbook 
+	}
+	stage ('deploy_bluegreen - Checkout') {
+ 	 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'http://192.168.33.151/root/bluegreen.git']]]) 
+	}
+	stage ('deploy_bluegreen - Build') {
+ 			// Shell build step
+sh """ 
+echo deploy 
+ """		// Ansible playbook 
+	}
+	stage ('test_bluegreen - Build') {
+ 			// Shell build step
+sh """ 
+echo test 
+ """		// Ansible playbook 
+	}
+	stage ('deploy_prod_bluegreen - Build') {
+ 			// Shell build step
+sh """ 
+echo prod 
+ """		// Ansible playbook 
+	}
+}
+}
